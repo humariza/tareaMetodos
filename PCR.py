@@ -52,13 +52,17 @@ for i in range(len(buenos)):
     datosBuenos.append(datos[buenos[i]])
 for i in range(len(malos)):
     datosMalos.append(datos[malos[i]])
-
-print(len(datosBuenos))
 print(len(datosMalos))
+print(len(datosBuenos))
+
 
 eje1=np.matmul(datosMalos,eigenvectores)
 eje2=np.matmul(datosBuenos,eigenvectores)
 print(len(eje1))
 print(len(eje2))
-# plt.plot(eje1,eje2)
-# plt.show()
+plt.figure()
+plt.title("Datos Buenos y Malos")
+plt.scatter(eje1[:,0],eje1[:,1], label="M", color="Red")
+plt.scatter(eje2[:,0],eje2[:,1], label="B", color="Green")
+plt.legend()
+plt.show()
