@@ -22,5 +22,11 @@ def matrizCovarianza(datos):
 # print(pruebaMetodo)
 eigenvalues,eigenvectores = np.linalg.eig(matrizCovarianza(datos))
 
+for i in range(len(eigenvalues)):
+    print ('=============Autovalor=============', eigenvalues[i])
+    print ('=============Autovector============', eigenvectores[i])
 #print(eigenvalues)
 #print(eigenvectores)
+#PUNTO 1 D
+print ('Los dos valores mas importantes corresponden a los autovalores mas grandes que son los que contienen mas correlacion que son:')
+print (eigenvalues[0],'\n y',eigenvalues[1])
