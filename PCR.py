@@ -13,7 +13,7 @@ def matrizCovarianza(datos):
 		for j in range(dim):
 			promedio_i = np.mean(datos[:,i])
 			promedio_j = np.mean(datos[:,j])
-			cov[i,j] = np.sum((datos[:,i]-promedio_i) * (datos[:,j]-promedio_j))
+			cov[i,j] = np.sum((datos[:,i]-promedio_i) * (datos[:,j]-promedio_j))/(dim-1)
 	return cov
 
 
@@ -43,4 +43,22 @@ for indice in range(len(datosByM)):
     else:
         malos.append(indice)
 
-print(buenos)
+#print(buenos)
+
+#ahora con los indices anteriores separamos este set de datos en datos malignos y begninos
+datosMalos=[]
+datosBuenos=[]
+for i in range(len(buenos)):
+    datosBuenos.append(datos[buenos[i]])
+for i in range(len(malos)):
+    datosMalos.append(datos[malos[i]])
+
+print(len(datosBuenos))
+print(len(datosMalos))
+
+eje1=np.matmul(datosMalos,eigenvectores)
+eje2=np.matmul(datosBuenos,eigenvectores)
+print(len(eje1))
+print(len(eje2))
+# plt.plot(eje1,eje2)
+# plt.show()
