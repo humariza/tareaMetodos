@@ -70,8 +70,9 @@ def filtro2(frecuencia,coeficientes):
 			dataFinal.append(coeficientes[i])
 	return dataFinal
 filtro= ifft(filtro2(frecuencia,fouriersignal))
-plt.title('filtro')
+plt.title('Filtro')
 plt.scatter(frecuencia,filtro,label='Filtro')
 plt.ylabel("Filtro")
-plt.xlabel("frecuencia")
-plt.show()
+plt.xlabel("Frecuencia")
+plt.savefig("ArizaHumberto_filtrada.pdf")
+# plt.show()
