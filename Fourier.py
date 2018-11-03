@@ -124,3 +124,12 @@ plt.savefig("ArizaHumberto_TF_interpola.pdf")
 
 
 print("Las diferencias principales pueden verse en los valores de los segundos picos mas altos de la trnsofrmada de fourier, siendo mas grande los segundos picos mas altos de la original ,posteriormente la cuadratica y por ultimo la cubica. Adicionalmente existe mas 'ruido' en las interpolaciones extendiendose casi 1000 mas en las frecuencias")
+def filtro500(frecuencia,coeficientes):
+	
+	dataFinal=[]
+	for i in range(len(frecuencia)):
+		if(frecuencia[i]>500 and frecuencia[i]<(-500) ):
+			dataFinal.append(0)
+		else:
+			dataFinal.append(coeficientes[i])
+	return dataFinal
