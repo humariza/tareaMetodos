@@ -42,7 +42,7 @@ plt.plot(frecuencia,fouriersignal)
 plt.title("Fourier Signal") 
 plt.xlabel('Frecuencia')
 plt.ylabel('Transformada de Fourier Discreta')
-# plt.show()
+# #plt.show()
 plt.savefig("ArizaHumberto_TF.pdf")
 
 
@@ -76,7 +76,7 @@ plt.ylabel("Filtro")
 plt.xlabel("Frecuencia")
 plt.legend()
 plt.savefig("ArizaHumberto_filtrada.pdf")
-# plt.show()
+# #plt.show()
 
 #punto 3.7
 print('Punto 3.7')
@@ -118,7 +118,7 @@ plt.plot(frecuencia,fouriersignal,label="Original",color='green')
 plt.xlabel('Frecuencia')
 plt.ylabel('Transformada')
 plt.legend()
-plt.show()
+#plt.show()
 plt.savefig("ArizaHumberto_TF_interpola.pdf")
 
 
@@ -154,5 +154,5 @@ plt.plot(frecuenciaCuadratica,cuadratica1000,label="Filtro 1000 cuadratico")
 plt.plot(frecuencia,originales1000,label="Filtro 1000 originales")
 plt.legend()
 plt.savefig("ArizaHumberto_2Filtros.pdf")
-#plt.show()
+###plt.show()
 #NOTA : POR ALGUNA EXTRANA RAZON LOS FILTROS NO PARECEN APLICARSE PERO SI NOS VAMOS A LA DEFINICION PARECEN ESTAR BIEN
