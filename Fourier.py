@@ -30,7 +30,7 @@ def fourier(senalx, senaly,N):
             sumaTotal[i]+=senaly[j]*np.exp(-1j*2*np.pi*j*(i/N))
     return sumaTotal/N
 
-paso=senalx[1]-senaly[0]
+paso=senalx[1]-senalx[0]
 #obteniendo la frecuencia de los datos
 frecuencia=fftfreq(N,paso)
 print('use fftfreq')
@@ -42,7 +42,7 @@ plt.plot(frecuencia,fouriersignal)
 plt.title("Fourier Signal") 
 plt.xlabel('Frecuencia')
 plt.ylabel('Transformada de Fourier Discreta')
-plt.show()
+# plt.show()
 plt.savefig("ArizaHumberto_TF.pdf")
 
 
@@ -64,15 +64,63 @@ def filtro2(frecuencia,coeficientes):
 	
 	dataFinal=[]
 	for i in range(len(frecuencia)):
-		if(frecuencia[i]>1000 and frecuencia[i]<1000 ):
+		if(frecuencia[i]>1000 and frecuencia[i]<(-1000) ):
 			dataFinal.append(0)
 		else:
 			dataFinal.append(coeficientes[i])
 	return dataFinal
 filtro= ifft(filtro2(frecuencia,fouriersignal))
 plt.title('Filtro')
-plt.scatter(frecuencia,filtro,label='Filtro')
+plt.plot(frecuencia,filtro,label='Filtro')
 plt.ylabel("Filtro")
 plt.xlabel("Frecuencia")
+plt.legend()
 plt.savefig("ArizaHumberto_filtrada.pdf")
 # plt.show()
+
+#punto 3.7
+print('Punto 3.7')
+print( 'Los datos incompletos no presentan el mismo espacio entre datos, y debido a esto, no es posible calcular correctamete las frecuencias afectando este metodo ')
+#punto 3.8
+interpolacionCubica =interp1d(incompletosx, incompletosy, kind='cubic') 
+interpolacionCuadratica = interp1d(incompletosx, incompletosy, kind='quadratic') 
+
+minimx = min(incompletosx)
+maximx = max(incompletosx)
+
+#los 512 puntos de la interpolacion
+puntos =np.linspace(minimx, maximx , 512)
+
+cuadratica = interpolacionCuadratica(puntos) 
+cubica = interpolacionCubica(puntos)
+
+
+frecuenciaCubica = fftfreq(len(senalx),paso)
+frecuenciaCuadratica=fftfreq(len(senalx),paso)
+
+transformadaCubica = fourier(senalx,cubica,N)
+transformadaCuadratica = fourier(senalx,cuadratica,N)
+
+plt.figure()
+plt.subplot(3,1,1)
+plt.title('Interpolados(cuadratica,cubica)y Original')
+plt.plot(frecuenciaCuadratica,transformadaCuadratica,label="cuadratica")
+plt.xlabel('Frecuencia')
+plt.ylabel('Transformada')
+plt.legend()
+plt.subplot(3,1,2)
+plt.plot(frecuenciaCubica,transformadaCubica,label="cubica",color='red')
+plt.xlabel('Frecuencia')
+plt.ylabel('Transformada')
+plt.legend()
+plt.subplot(3,1,3)
+plt.plot(frecuencia,fouriersignal,label="Original",color='green')
+plt.xlabel('Frecuencia')
+plt.ylabel('Transformada')
+plt.legend()
+plt.show()
+plt.savefig("ArizaHumberto_TF_interpola.pdf")
+
+
+
+print("Las diferencias principales pueden verse en los valores de los segundos picos mas altos de la trnsofrmada de fourier, siendo mas grande los segundos picos mas altos de la original ,posteriormente la cuadratica y por ultimo la cubica. Adicionalmente existe mas 'ruido' en las interpolaciones extendiendose casi 1000 mas en las frecuencias")
