@@ -133,3 +133,26 @@ def filtro500(frecuencia,coeficientes):
 		else:
 			dataFinal.append(coeficientes[i])
 	return dataFinal
+
+
+cubico500 = filtro500(frecuenciaCubica,transformadaCubica)
+cubico1000 = filtro2(frecuenciaCubica,transformadaCubica)
+cuadratica500 = filtro500(frecuenciaCuadratica,transformadaCuadratica)
+cuadratica1000=filtro2(frecuenciaCuadratica,transformadaCuadratica)
+originales500 =filtro500(frecuencia,fouriersignal)
+originales1000=filtro2(frecuencia,fouriersignal)
+plt.figure()
+plt.subplot(2,1,1)
+plt.plot(frecuenciaCubica,cubico500,label="Filtro 500 cubico")
+plt.plot(frecuenciaCuadratica,cuadratica500,label="Filtro 500 cuadratico")
+plt.plot(frecuencia,originales500,label="Filtro 500 originales")
+plt.legend()
+plt.title("Filtros Originales e Interpoladas")
+plt.subplot(2,1,2)
+plt.plot(frecuenciaCubica,cubico1000,label="Filtro 1000 cubico")
+plt.plot(frecuenciaCuadratica,cuadratica1000,label="Filtro 1000 cuadratico")
+plt.plot(frecuencia,originales1000,label="Filtro 1000 originales")
+plt.legend()
+plt.savefig("ArizaHumberto_2Filtros.pdf")
+#plt.show()
+#NOTA : POR ALGUNA EXTRANA RAZON LOS FILTROS NO PARECEN APLICARSE PERO SI NOS VAMOS A LA DEFINICION PARECEN ESTAR BIEN
