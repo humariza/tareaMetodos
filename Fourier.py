@@ -36,14 +36,42 @@ frecuencia=fftfreq(N,paso)
 print('use fftfreq')
 
 fouriersignal= fourier(senalx,senaly,N);
-print(fouriersignal)
+# print(fouriersignal)
 plt.figure()
 plt.plot(frecuencia,fouriersignal)
 plt.title("Fourier Signal") 
 plt.xlabel('Frecuencia')
 plt.ylabel('Transformada de Fourier Discreta')
-# plt.show()
+plt.show()
 plt.savefig("ArizaHumberto_TF.pdf")
 
 
 
+#sacando filtro de S7C2
+def filtro(frecuencia,coeficientes):
+	
+	dataFinal=[]
+	for i in range(len(frecuencia)):
+		if(coeficientes[i]>(-0.025) and coeficientes[i]<0.025):
+			dataFinal.append(frecuencia[i])
+		
+	return dataFinal
+
+frecuenciasPrincipales = filtro(frecuencia,fouriersignal)
+print('las frecuencias principales son: ########',frecuenciasPrincipales)
+
+def filtro2(frecuencia,coeficientes):
+	
+	dataFinal=[]
+	for i in range(len(frecuencia)):
+		if(frecuencia[i]>1000 and frecuencia[i]<1000 ):
+			dataFinal.append(0)
+		else:
+			dataFinal.append(coeficientes[i])
+	return dataFinal
+filtro= ifft(filtro2(frecuencia,fouriersignal))
+plt.title('filtro')
+plt.scatter(frecuencia,filtro,label='Filtro')
+plt.ylabel("Filtro")
+plt.xlabel("frecuencia")
+plt.show()
